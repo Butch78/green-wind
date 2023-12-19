@@ -1,0 +1,80 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/postgres
+{
+	"name": "green-wind",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/poetry:2": {}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or the host.
+	// "forwardPorts": [5000, 5432],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "pip install --user -r requirements.txt",
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"charliermarsh.ruff",
+				"ms-python.black-formatter",
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-pg",
+				"ms-vscode.vscode-node-azure-pack",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"ms-toolsai.jupyter",
+				"ms-azuretools.vscode-docker",
+				"James-Yu.latex-workshop"
+			],
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.testing.unittestEnabled": false,
+				"python.testing.pytestEnabled": false,
+				"[python]": {
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.fixAll": true
+					}
+				},
+				"python.formatting.provider": "black",
+				"sqltools.connections": [
+					{
+						"name": "Local database",
+						"driver": "PostgreSQL",
+						"server": "localhost",
+						"port": 5432,
+						"database": "postgres",
+						"username": "admin",
+						"password": "LocalPasswordOnly"
+					},
+					{
+						"name": "Azure database",
+						"driver": "PostgreSQL",
+						"server": "<HOSTNAME>.postgres.database.azure.com",
+						"port": 5432,
+						"database": "postgres",
+						"username": "<USERNAME>",
+						"askForPassword": true,
+						"pgOptions": {
+							"ssl": true
+						}
+					}
+				],
+				"files.exclude": {
+					".ruff_cache": true,
+					".pytest_cache": true
+				}
+			}
+		}
+	},
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "green-wind"
+version = "0.1.0"
+description = "A Python Green Energy platform that implements statistical models"
+authors = ["Butch78 <matthewtyleraylward@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ruff = "^0.1.8"
+fastapi = "^0.105.0"
+uvicorn = "^0.24.0.post1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

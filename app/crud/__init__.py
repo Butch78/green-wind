@@ -1,5 +1,9 @@
 from app.crud.base import CRUDBase
 
+from app.schema.cell_conditions import CellConditions, CellConditionsCreate, CellConditionsUpdate
+
+cell_conditions = CRUDBase[CellConditions, CellConditionsCreate, CellConditionsUpdate](CellConditions)
+
 from app.schema.deposit_rate import DepositRates, DepositRatesCreate, DepositRatesUpdate
 
 from app.schema.target_range import TargetRanges, TargetRangesCreate, TargetRangesUpdate

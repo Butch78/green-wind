@@ -34,6 +34,7 @@
 			],
 			// Set *default* container specific settings.json values on container create.
 			"settings": {
+				"poetryPath": "poetry",
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.linting.enabled": true,
 				"python.testing.unittestEnabled": false,
@@ -52,8 +53,8 @@
 						"server": "localhost",
 						"port": 5432,
 						"database": "postgres",
-						"username": "admin",
-						"password": "LocalPasswordOnly"
+						"username": "postgres",
+						"password": "postgres"
 					},
 					{
 						"name": "Azure database",

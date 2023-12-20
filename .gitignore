@@ -6,7 +6,13 @@ __pycache__/
 dist/
 build/
 *.egg
+*.pyc
 
 # Poetry
 .poetry/
 .poetry.lock
+
+
+# Data Folder
+data/
+

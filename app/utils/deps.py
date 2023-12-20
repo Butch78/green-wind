@@ -1,5 +1,5 @@
-import os
 from app.utils.import_cell_conditions import import_cell_conditions
+from app.utils.import_cell_training_data import import_cell_training_data
 
 from dotenv import load_dotenv
 from sqlmodel import SQLModel, Session, create_engine
@@ -41,6 +41,7 @@ def import_data():
     import_deposit_rates(session)
     import_target_rates(session)
     import_cell_conditions(session)
+    import_cell_training_data(session)
 
     session.close()
 

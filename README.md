@@ -2,10 +2,80 @@
 
 Green Wind is an example of a ETL tool that is able to take in data and store it in a Postgres Database! 
 
+Here is an example of some unstructered data that we will be working with:
+
+
+```json
+{
+  "battery_id": "B123456789",
+  "manufacturer": "GreenPowerTech",
+  "model": "GPT-5000",
+  "capacity": {
+    "current_capacity": "4000 kWh",
+    "design_capacity": "5000 kWh",
+    "remaining_capacity": "3500 kWh"
+  },
+  "voltage": {
+    "terminal_voltage": "480 V",
+    "operating_voltage": "450-500 V",
+    "charging_voltage": "460 V"
+  },
+  "temperature": {
+    "internal_temperature": "35°C",
+    "external_temperature": "30°C",
+    "operating_temperature_range": "20-40°C"
+  },
+  "current": {
+    "charging_current": "100 A",
+    "discharging_current": "95 A",
+    "operating_current_range": "80-110 A"
+  },
+  "status": {
+    "state_of_charge": "70%",
+    "health_status": "Good",
+    "operational_status": "Active",
+    "faults": [
+      "Overtemperature warning",
+      "Low voltage alert"
+    ]
+  },
+  "energy_throughput": {
+    "total_energy_delivered": "2000 kWh",
+    "total_energy_charged": "1800 kWh"
+  },
+  "maintenance": {
+    "last_maintenance_date": "2023-12-20",
+    "next_maintenance_due": "2024-06-20",
+    "maintenance_actions": [
+      {
+        "action_id": "M123",
+        "action_description": "Replace cooling fan",
+        "action_status": "Completed"
+      },
+      {
+        "action_id": "M124",
+        "action_description": "Inspect insulation",
+        "action_status": "Pending"
+      }
+    ]
+  },
+  "environmental_conditions": {
+    "ambient_temperature": "28°C",
+    "humidity": "60%",
+    "altitude": "500 meters"
+  },
+  "operational_parameters": {
+    "charge_cycles": "150",
+    "discharge_cycles": "140",
+    "max_continuous_discharge_rate": "120 A",
+    "max_continuous_charge_rate": "110 A"
+  },
+  "timestamp": "2023-12-21T10:00:00Z"
+}
+```
+
 The source of the Data and Data Science code is from here:
 https://github.com/Duvey314/austin-green-energy-predictor
-
-
 
 # Set Up Instructions
 

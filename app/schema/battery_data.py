@@ -1,76 +1,70 @@
-from pydantic import BaseModel
-from sqlmodel import SQLModel
-
+from typing import List, Optional
+from sqlmodel import Field, Relationship, SQLModel
+from app.schema.capacity import Capacity
+from app.schema.current import Current
+from app.schema.energy_throughput import EnergyThroughput
+from app.schema.environmental_conditions import EnvironmentalCondition
+from app.schema.maintence.maintence import Maintenance
+from app.schema.operational_parameters import OperationalParameter
 from app.schema.schemas import TimestampSchema
+from app.schema.status.status import Status
+from app.schema.temperature import Temperature
 from app.schema.voltage import Voltage
 
 
-class Capacity(BaseModel):
-    current_capacity: str
-    design_capacity: str
-    remaining_capacity: str
-
-
-class Temperature(BaseModel):
-    internal_temperature: str
-    external_temperature: str
-    operating_temperature_range: str
-
-
-class Current(BaseModel):
-    charging_current: str
-    discharging_current: str
-    operating_current_range: str
-
-
-class Status(BaseModel):
-    state_of_charge: str
-    health_status: str
-    operational_status: str
-    faults: list[str]
-
-
-class EnergyThroughput(BaseModel):
-    total_energy_delivered: str
-    total_energy_charged: str
-
-
-class MaintenanceAction(BaseModel):
-    action_id: str
-    action_description: str
-    action_status: str
-
-
-class Maintenance(BaseModel):
-    last_maintenance_date: str
-    next_maintenance_due: str
-    maintenance_actions: list[MaintenanceAction]
-
-
-class EnvironmentalConditions(BaseModel):
-    ambient_temperature: str
-    humidity: str
-    altitude: str
-
-
-class OperationalParameters(BaseModel):
-    charge_cycles: str
-    discharge_cycles: str
-    max_continuous_discharge_rate: str
-    max_continuous_charge_rate: str
-
-
-class BatteryData(TimestampSchema, SQLModel):
+class BatteryDataBase(SQLModel):
     battery_id: str
     manufacturer: str
     model: str
-    capacity: Capacity
-    voltage: Voltage
-    temperature: Temperature
-    current: Current
-    status: Status
-    energy_throughput: EnergyThroughput
-    maintenance: Maintenance
-    environmental_conditions: EnvironmentalConditions
-    operational_parameters: OperationalParameters
     timestamp: str
+
+
+class BatteryData(TimestampSchema, SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    battery_id: str
+    manufacturer: str
+    model: str
+    timestamp: str
+
+    capacity: Optional[Capacity] = Relationship(back_populates="batterydata")
+    voltage: Optional[Voltage] = Relationship(back_populates="batterydata")
+    temperature: Optional[Temperature] = Relationship(back_populates="batterydata")
+    current: Optional[Current] = Relationship(back_populates="batterydata")
+    status: Optional[Status] = Relationship(back_populates="batterydata")
+    energy_throughput: Optional[EnergyThroughput] = Relationship(
+        back_populates="batterydata"
+    )
+    maintenance: Optional[Maintenance] = Relationship(back_populates="batterydata")
+    environmental_conditions: Optional[EnvironmentalCondition] = Relationship(
+        back_populates="batterydata"
+    )
+    operational_parameters: Optional[OperationalParameter] = Relationship(
+        back_populates="batterydata"
+    )
+
+    class Config:
+        from_attributes = True
+
+
+class BatteryDataCreate(BatteryDataBase):
+    pass
+
+
+class BatteryDataRead(BatteryDataBase):
+    capacities: List[Capacity] = []
+    voltages: List[Voltage] = []
+    temperatures: List[Temperature] = []
+    currents: List[Current] = []
+    statuses: List[Status] = []
+    energy_throughputs: List[EnergyThroughput] = []
+    maintenances: List[Maintenance] = []
+    environmental_conditions: List[EnvironmentalCondition] = []
+    operational_parameters: List[OperationalParameter] = []
+
+
+class BatteryDataReadOut(BatteryDataRead):
+    id: int
+
+
+class BatteryDataUpdate(BatteryDataBase):
+    pass

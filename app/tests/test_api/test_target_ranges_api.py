@@ -7,6 +7,7 @@ from app.utils.deps import get_session
 
 client = TestClient(app)
 
+
 @pytest.fixture(name="session")
 def session_fixture():
     engine = create_engine(
@@ -32,10 +33,10 @@ def test_create_deposit_rate():
     response = client.post(
         "/target_ranges/",
         json={
-  "date": "2023-12-15T09:52:24.810Z",
-  "lower_bound": 0.1,
-  "upper_bound": 0.1
-},
+            "date": "2023-12-15T09:52:24.810Z",
+            "lower_bound": 0.1,
+            "upper_bound": 0.1,
+        },
     )
     assert response.status_code == 200, response.text
     data = response.json()
@@ -43,4 +44,3 @@ def test_create_deposit_rate():
     assert data["lower_bound"] == 0.1
     assert data["upper_bound"] == 0.1
     assert "id" in data
-

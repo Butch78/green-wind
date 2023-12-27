@@ -34,4 +34,3 @@ def import_cell_conditions(session: Session) -> list[CellConditionsCreate] | Non
     crud.cell_conditions.create_multiple(session, obj_in=cell_conditions)
 
     return cell_conditions
-

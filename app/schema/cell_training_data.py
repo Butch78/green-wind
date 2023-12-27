@@ -1,14 +1,15 @@
 from sqlmodel import SQLModel, Field
+from app.schema.schemas import TimestampSchema
 
 
-class CellTrainingData(SQLModel):
+class CellTrainingDataBase(SQLModel):
     folder_name: str = Field(..., description="File name")
     x_train: int = Field(..., description="Cell cycle")
     y_train: float = Field(..., description="Cell voltage")
     static_cell_voltage: float = Field(..., description="Static cell voltage")
 
 
-class CellTrainingDatas(SQLModel, table=True):
+class CellTrainingDatas(TimestampSchema, SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
     folder_name: str = Field(..., description="File name")
     x_train: int = Field(..., description="Cell cycle")
@@ -16,10 +17,10 @@ class CellTrainingDatas(SQLModel, table=True):
     static_cell_voltage: float = Field(..., description="Static cell voltage")
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
-class CellDataTrainingCreate(CellTrainingData):
+class CellDataTrainingCreate(CellTrainingDataBase):
     pass
 
 
@@ -27,9 +28,9 @@ class CellDataCreateOut(CellDataTrainingCreate):
     id: int
 
 
-class CellDataRead(CellTrainingData):
+class CellDataRead(CellTrainingDataBase):
     pass
 
 
-class CellDataUpdate(CellTrainingData):
+class CellDataUpdate(CellTrainingDataBase):
     pass

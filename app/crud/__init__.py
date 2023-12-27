@@ -17,16 +17,16 @@ cell_conditions = CRUDBase[CellConditions, CellConditionsCreate, CellConditionsU
 cell_training_data = CRUDBase[
     CellTrainingDatas, CellDataTrainingCreate, CellDataUpdate
 ](CellTrainingDatas)
-from app.schema.deposit_rate import DepositRates, DepositRatesCreate, DepositRatesUpdate
-
-from app.schema.target_range import TargetRanges, TargetRangesCreate, TargetRangesUpdate
-from app.schema.target_rate import TargetRates, TargetRatesCreate, TargetRatesUpdate
 
 
-deposit_rates = CRUDBase[DepositRates, DepositRatesCreate, DepositRatesUpdate](
-    DepositRates
+from app.crud.crud_battery_data import (
+    battery_data,
 )
-target_ranges = CRUDBase[TargetRanges, TargetRangesCreate, TargetRangesUpdate](
-    TargetRanges
+
+from app.schema.battery_data import (
+    BatteryData,
+    BatteryDataCreate,
+    BatteryDataUpdate,
 )
-target_rates = CRUDBase[TargetRates, TargetRatesCreate, TargetRatesUpdate](TargetRates)
+
+battery_data = CRUDBase[battery_data, BatteryDataCreate, BatteryDataUpdate](BatteryData)

@@ -3,9 +3,6 @@ from app.utils.import_cell_training_data import import_cell_training_data
 
 from dotenv import load_dotenv
 from sqlmodel import SQLModel, Session, create_engine
-from app.utils.import_target_ranges import import_target_ranges
-from app.utils.import_deposit_rates import import_deposit_rates
-from app.utils.import_target_rates import import_target_rates
 from sqlalchemy import text
 
 from app.utils.config import settings
@@ -37,9 +34,6 @@ def import_data():
     session = next(get_session())
 
     # TODO parrallelize so that the data is imported in parallel
-    import_target_ranges(session)
-    import_deposit_rates(session)
-    import_target_rates(session)
     import_cell_conditions(session)
     import_cell_training_data(session)
 
@@ -49,7 +43,6 @@ def import_data():
 
 
 def create_read_only_user():
-    # TODO create a read-only user
 
     session = next(get_session())
 

@@ -1,6 +1,6 @@
 # Green Wind
 
-Green Wind is an example of a ETL tool that is able to take in data and store it in a Postgres Database! 
+Green Wind is an example of a ETL tool that is able to take in unstructed Battery Data and store it in a Postgres Database! 
 
 Here is an example of some unstructered data that we will be working with:
 
@@ -35,8 +35,16 @@ Here is an example of some unstructered data that we will be working with:
     "health_status": "Good",
     "operational_status": "Active",
     "faults": [
-      "Overtemperature warning",
-      "Low voltage alert"
+      {
+        "fault_id": "F123",
+        "fault_description": "Overtemperature warning",
+        "fault_timestamp": "2023-12-21T09:00:00Z"
+      },
+      {
+        "fault_id": "F124",
+        "fault_description": "Low voltage alert",
+        "fault_timestamp": "2023-12-21T09:00:00Z"
+      }
     ]
   },
   "energy_throughput": {
@@ -62,7 +70,8 @@ Here is an example of some unstructered data that we will be working with:
   "environmental_conditions": {
     "ambient_temperature": "28°C",
     "humidity": "60%",
-    "altitude": "500 meters"
+    "altitude": "500 meters",
+    "pressure": "1 atm"
   },
   "operational_parameters": {
     "charge_cycles": "150",

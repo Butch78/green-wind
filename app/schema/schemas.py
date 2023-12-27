@@ -2,7 +2,7 @@ from typing import Any
 from datetime import datetime
 
 from pydantic import field_serializer
-from SQLModel import Field, SQLModel
+from sqlmodel import Field, SQLModel
 
 
 class TimestampSchema(SQLModel):

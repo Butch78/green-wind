@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class OperationalParametersBase(SQLModel):
+class OperationalParametersBase(TimestampSchema, SQLModel):
     charge_cycles: str
     discharge_cycles: str
     max_continuous_discharge_rate: str

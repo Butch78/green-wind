@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class EnvironmentalConditionsBase(SQLModel):
+class EnvironmentalConditionsBase(TimestampSchema, SQLModel):
     ambient_temperature: str
     humidity: str
     altitude: str

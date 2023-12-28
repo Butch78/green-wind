@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class TemperatureBase(SQLModel):
+class TemperatureBase(TimestampSchema, SQLModel):
     internal_temperature: str
     external_temperature: str
     operating_temperature_range: str

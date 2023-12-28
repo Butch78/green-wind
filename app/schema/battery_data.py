@@ -12,7 +12,7 @@ from app.schema.temperature import Temperature
 from app.schema.voltage import Voltage
 
 
-class BatteryDataBase(SQLModel):
+class BatteryDataBase(TimestampSchema, SQLModel):
     battery_id: str
     manufacturer: str
     model: str
@@ -26,12 +26,12 @@ class BatteryData(TimestampSchema, SQLModel, table=True):
     model: str
     timestamp: str
 
-    capacity: Optional[Capacity] = Relationship(back_populates="batterydata")
-    voltage: Optional[Voltage] = Relationship(back_populates="batterydata")
-    temperature: Optional[Temperature] = Relationship(back_populates="batterydata")
-    current: Optional[Current] = Relationship(back_populates="batterydata")
-    status: Optional[Status] = Relationship(back_populates="batterydata")
-    energy_throughput: Optional[EnergyThroughput] = Relationship(
+    capacity: Optional["Capacity"] = Relationship(back_populates="batterydata")
+    voltage: Optional["Voltage"] = Relationship(back_populates="batterydata")
+    temperature: Optional["Temperature"] = Relationship(back_populates="batterydata")
+    current: Optional["Current"] = Relationship(back_populates="batterydata")
+    status: Optional["Status"] = Relationship(back_populates="batterydata")
+    energy_throughput: Optional["EnergyThroughput"] = Relationship(
         back_populates="batterydata"
     )
     maintenance: Optional[Maintenance] = Relationship(back_populates="batterydata")

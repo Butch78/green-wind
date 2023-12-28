@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class CurrentBase(SQLModel):
+class CurrentBase(TimestampSchema, SQLModel):
     charging_current: str
     discharging_current: str
     operating_current_range: str

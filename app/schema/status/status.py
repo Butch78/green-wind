@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class StatusBase(SQLModel):
+class StatusBase(TimestampSchema, SQLModel):
     state_of_charge: str
     health_status: str
     operational_status: str

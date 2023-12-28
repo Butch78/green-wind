@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.status.status import Statuses
 
 
-class FaultBase(SQLModel):
+class FaultBase(TimestampSchema, SQLModel):
     fault_id: str
     fault_description: str
     fault_timestamp: str

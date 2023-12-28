@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class CapacityBase(SQLModel):
+class CapacityBase(TimestampSchema, SQLModel):
     current_capacity: str
     design_capacity: str
     remaining_capacity: str

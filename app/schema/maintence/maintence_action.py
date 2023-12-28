@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.maintence.maintence import Maintenance
 
 
-class MaintenanceActionBase(SQLModel):
+class MaintenanceActionBase(TimestampSchema, SQLModel):
     action_id: str
     action_description: str
     action_status: str

@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class EnergyThroughputBase(SQLModel):
+class EnergyThroughputBase(TimestampSchema, SQLModel):
     total_energy_delivered: str
     total_energy_charged: str
 

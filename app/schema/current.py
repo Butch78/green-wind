@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class CurrentBase(TimestampSchema, SQLModel):
+class CurrentBase(SQLModel):
     charging_current: str
     discharging_current: str
     operating_current_range: str
@@ -19,7 +19,7 @@ class Current(TimestampSchema, SQLModel, table=True):
     operating_current_range: str
 
     battery_data_id: Optional[int] = Field(default=None, foreign_key="batterydata.id")
-    battery_data: Optional["BatteryData"] = Relationship(back_populates="currents")
+    battery_data: Optional["BatteryData"] = Relationship(back_populates="current")
 
     class Config:
         from_attributes = True

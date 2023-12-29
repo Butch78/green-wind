@@ -7,19 +7,15 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class OperationalParametersBase(TimestampSchema, SQLModel):
+class OperationalParametersBase(SQLModel):
     charge_cycles: str
     discharge_cycles: str
     max_continuous_discharge_rate: str
     max_continuous_charge_rate: str
 
 
-class OperationalParameter(TimestampSchema, SQLModel, table=True):
+class OperationalParameter(TimestampSchema, OperationalParametersBase, table=True):
     id: int = Field(default=None, primary_key=True)
-    charge_cycles: str
-    discharge_cycles: str
-    max_continuous_discharge_rate: str
-    max_continuous_charge_rate: str
 
     battery_data_id: Optional[int] = Field(default=None, foreign_key="batterydata.id")
     battery_data: Optional["BatteryData"] = Relationship(

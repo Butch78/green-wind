@@ -6,20 +6,17 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class CapacityBase(TimestampSchema, SQLModel):
+class CapacityBase(SQLModel):
     current_capacity: str
     design_capacity: str
     remaining_capacity: str
 
 
-class Capacity(TimestampSchema, SQLModel):
+class Capacity(TimestampSchema, CapacityBase, table=True):
     id: int = Field(default=None, primary_key=True)
-    current_capacity: str
-    design_capacity: str
-    remaining_capacity: str
 
     battery_data_id: Optional[int] = Field(default=None, foreign_key="batterydata.id")
-    battery_data: Optional["BatteryData"] = Relationship(back_populates="capacities")
+    battery_data: Optional["BatteryData"] = Relationship(back_populates="capacity")
 
     class Config:
         from_attributes = True

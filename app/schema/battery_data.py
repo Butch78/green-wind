@@ -1,22 +1,38 @@
-from typing import List, Optional
+from typing import Optional
 from sqlmodel import Field, Relationship, SQLModel
-from app.schema.capacity import Capacity
-from app.schema.current import Current
-from app.schema.energy_throughput import EnergyThroughput
-from app.schema.environmental_conditions import EnvironmentalCondition
-from app.schema.maintence.maintence import Maintenance
-from app.schema.operational_parameters import OperationalParameter
+from app.schema.capacity import Capacity, CapacityCreate
+from app.schema.current import Current, CurrentCreate
+from app.schema.energy_throughput import EnergyThroughput, EnergyThroughputCreate
+from app.schema.environmental_conditions import (
+    EnvironmentalCondition,
+    EnvironmentalConditionsCreate,
+)
+from app.schema.maintenance.maintenance import Maintenance, MaintenanceCreate
+from app.schema.operational_parameters import (
+    OperationalParameter,
+    OperationalParametersCreate,
+)
 from app.schema.schemas import TimestampSchema
-from app.schema.status.status import Status
-from app.schema.temperature import Temperature
-from app.schema.voltage import Voltage
+from app.schema.status.status import Status, StatusCreate
+from app.schema.temperature import Temperature, TemperatureCreate
+from app.schema.voltage import Voltage, VoltageCreate
 
 
-class BatteryDataBase(TimestampSchema, SQLModel):
+class BatteryDataBase(SQLModel):
     battery_id: str
     manufacturer: str
     model: str
     timestamp: str
+
+    capacity: CapacityCreate
+    voltage: VoltageCreate
+    temperature: TemperatureCreate
+    current: CurrentCreate
+    status: StatusCreate
+    energy_throughput: EnergyThroughputCreate
+    maintenance: MaintenanceCreate
+    environmental_conditions: EnvironmentalConditionsCreate
+    operational_parameters: OperationalParametersCreate
 
 
 class BatteryData(TimestampSchema, SQLModel, table=True):
@@ -26,20 +42,20 @@ class BatteryData(TimestampSchema, SQLModel, table=True):
     model: str
     timestamp: str
 
-    capacity: Optional["Capacity"] = Relationship(back_populates="batterydata")
-    voltage: Optional["Voltage"] = Relationship(back_populates="batterydata")
-    temperature: Optional["Temperature"] = Relationship(back_populates="batterydata")
-    current: Optional["Current"] = Relationship(back_populates="batterydata")
-    status: Optional["Status"] = Relationship(back_populates="batterydata")
+    capacity: Optional["Capacity"] = Relationship(back_populates="battery_data")
+    voltage: Optional["Voltage"] = Relationship(back_populates="battery_data")
+    temperature: Optional["Temperature"] = Relationship(back_populates="battery_data")
+    current: Optional["Current"] = Relationship(back_populates="battery_data")
+    status: Optional["Status"] = Relationship(back_populates="battery_data")
     energy_throughput: Optional["EnergyThroughput"] = Relationship(
-        back_populates="batterydata"
+        back_populates="battery_data"
     )
-    maintenance: Optional[Maintenance] = Relationship(back_populates="batterydata")
-    environmental_conditions: Optional[EnvironmentalCondition] = Relationship(
-        back_populates="batterydata"
+    maintenance: Optional["Maintenance"] = Relationship(back_populates="battery_data")
+    environmental_conditions: Optional["EnvironmentalCondition"] = Relationship(
+        back_populates="battery_data"
     )
-    operational_parameters: Optional[OperationalParameter] = Relationship(
-        back_populates="batterydata"
+    operational_parameters: Optional["OperationalParameter"] = Relationship(
+        back_populates="battery_data"
     )
 
     class Config:
@@ -51,15 +67,7 @@ class BatteryDataCreate(BatteryDataBase):
 
 
 class BatteryDataRead(BatteryDataBase):
-    capacities: List[Capacity] = []
-    voltages: List[Voltage] = []
-    temperatures: List[Temperature] = []
-    currents: List[Current] = []
-    statuses: List[Status] = []
-    energy_throughputs: List[EnergyThroughput] = []
-    maintenances: List[Maintenance] = []
-    environmental_conditions: List[EnvironmentalCondition] = []
-    operational_parameters: List[OperationalParameter] = []
+    pass
 
 
 class BatteryDataReadOut(BatteryDataRead):

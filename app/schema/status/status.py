@@ -1,13 +1,13 @@
 from typing import TYPE_CHECKING, List, Optional
 from sqlmodel import Field, SQLModel, Relationship
 from app.schema.schemas import TimestampSchema
-from app.schema.status.faults import Fault
+from app.schema.status.fault import Fault
 
 if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class StatusBase(TimestampSchema, SQLModel):
+class StatusBase(SQLModel):
     state_of_charge: str
     health_status: str
     operational_status: str
@@ -18,10 +18,10 @@ class Status(TimestampSchema, SQLModel, table=True):
     state_of_charge: str
     health_status: str
     operational_status: str
-    faults: List["Fault"] = Relationship(back_populates="statuses")
+    faults: List["Fault"] = Relationship(back_populates="status")
 
     battery_data_id: Optional[int] = Field(default=None, foreign_key="batterydata.id")
-    battery_data: Optional["BatteryData"] = Relationship(back_populates="statuses")
+    battery_data: Optional["BatteryData"] = Relationship(back_populates="status")
 
     class Config:
         from_attributes = True

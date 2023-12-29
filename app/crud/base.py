@@ -44,7 +44,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self, db: Session, *, obj_in: List[CreateSchemaType]
     ) -> List[SQLModel]:
         try:
-            db_models = [self.model(**item.dict()) for item in obj_in]
+            db_models = [self.model(**item.model_dump()) for item in obj_in]
             db.add_all(db_models)
             db.commit()
             return db_models

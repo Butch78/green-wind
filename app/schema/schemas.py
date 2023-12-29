@@ -7,7 +7,7 @@ from sqlmodel import Field, SQLModel
 
 class TimestampSchema(SQLModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default=None)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     @field_serializer("created_at")
     def serialize_dt(self, created_at: datetime | None, _info: Any) -> str | None:

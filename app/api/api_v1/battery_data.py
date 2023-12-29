@@ -13,7 +13,7 @@ from app.schema.battery_data import (
 router = APIRouter()
 
 
-@router.get("/", response_model=list[BatteryDataRead])
+@router.get("", response_model=list[BatteryDataRead])
 def read_battery_data(
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1),
@@ -34,7 +34,7 @@ def read_battery_data_by_id(
     return battery_data
 
 
-@router.post("/", response_model=BatteryDataRead)
+@router.post("", response_model=BatteryDataRead)
 def create_battery_data(
     *,
     battery_data_in: BatteryDataCreate,

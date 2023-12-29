@@ -6,19 +6,17 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class EnergyThroughputBase(TimestampSchema, SQLModel):
+class EnergyThroughputBase(SQLModel):
     total_energy_delivered: str
     total_energy_charged: str
 
 
-class EnergyThroughput(TimestampSchema, SQLModel, table=True):
+class EnergyThroughput(TimestampSchema, EnergyThroughputBase, table=True):
     id: int = Field(default=None, primary_key=True)
-    total_energy_delivered: str
-    total_energy_charged: str
 
     battery_data_id: Optional[int] = Field(default=None, foreign_key="batterydata.id")
     battery_data: Optional["BatteryData"] = Relationship(
-        back_populates="energy_throughputs"
+        back_populates="energy_throughput"
     )
 
     class Config:

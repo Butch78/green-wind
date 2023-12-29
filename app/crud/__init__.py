@@ -1,32 +1,40 @@
-from app.crud.base import CRUDBase
-
-from app.schema.cell_conditions import (
-    CellConditions,
-    CellConditionsCreate,
-    CellConditionsUpdate,
-)
-from app.schema.cell_training_data import (
-    CellTrainingDatas,
-    CellDataTrainingCreate,
-    CellDataUpdate,
-)
-
-cell_conditions = CRUDBase[CellConditions, CellConditionsCreate, CellConditionsUpdate](
-    CellConditions
-)
-cell_training_data = CRUDBase[
-    CellTrainingDatas, CellDataTrainingCreate, CellDataUpdate
-](CellTrainingDatas)
+#  Train data Crud
+from app.crud.crud_cell_conditions import cell_conditions
+from app.crud.crud_cell_training_data import cell_training_data
 
 
-from app.crud.crud_battery_data import (
-    battery_data,
-)
+# Battery data Crud
+from app.crud.crud_battery_data import battery_data
+from app.crud.crud_voltage import voltage
+from app.crud.crud_capacity import capacity
+from app.crud.crud_current import current
+from app.crud.crud_energy_throughput import energy_throughput
+from app.crud.crud_environmental_condition import environmental_condition
+from app.crud.crud_operational_parameter import operational_parameter
+from app.crud.crud_maintenance import maintenance
+from app.crud.crud_maintenance_action import maintenance_action
+from app.crud.crud_status import status
+from app.crud.crud_fault import fault
+from app.crud.crud_temperature import temperature
 
-from app.schema.battery_data import (
-    BatteryData,
-    BatteryDataCreate,
-    BatteryDataUpdate,
-)
+temperature = temperature
+maintenance_action = maintenance_action
+fault = fault
+maintenance = maintenance
+status = status
 
-battery_data = CRUDBase[battery_data, BatteryDataCreate, BatteryDataUpdate](BatteryData)
+
+operational_parameter = operational_parameter
+
+cell_conditions = cell_conditions
+cell_training_data = cell_training_data
+
+
+energy_throughput = energy_throughput
+environmental_condition = environmental_condition
+
+voltage = voltage
+battery_data = battery_data
+capacity = capacity
+
+current = current

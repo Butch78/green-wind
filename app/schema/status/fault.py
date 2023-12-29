@@ -3,10 +3,10 @@ from sqlmodel import Field, SQLModel, Relationship
 from app.schema.schemas import TimestampSchema
 
 if TYPE_CHECKING:
-    from app.schema.status.status import Statuses
+    from app.schema.status.status import Status
 
 
-class FaultBase(TimestampSchema, SQLModel):
+class FaultBase(SQLModel):
     fault_id: str
     fault_description: str
     fault_timestamp: str
@@ -19,7 +19,7 @@ class Fault(TimestampSchema, SQLModel, table=True):
     fault_timestamp: str
 
     status_id: Optional[int] = Field(default=None, foreign_key="status.id")
-    statuses: Optional["Statuses"] = Relationship(back_populates="faults")
+    status: Optional["Status"] = Relationship(back_populates="faults")
 
     class Config:
         from_attributes = True

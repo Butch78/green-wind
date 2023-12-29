@@ -8,22 +8,17 @@ if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
-class VoltageBase(TimestampSchema, SQLModel):
+class VoltageBase(SQLModel):
     terminal_voltage: str
     operating_voltage: str
     charging_voltage: str
 
-    battery_data_id: Optional[int]
 
-
-class Voltage(TimestampSchema, SQLModel, table=True):
+class Voltage(TimestampSchema, VoltageBase, table=True):
     id: int = Field(default=None, primary_key=True)
-    terminal_voltage: str
-    operating_voltage: str
-    charging_voltage: str
 
     battery_data_id: Optional[int] = Field(default=None, foreign_key="batterydata.id")
-    battery_data: Optional["BatteryData"] = Relationship(back_populates="voltages")
+    battery_data: Optional["BatteryData"] = Relationship(back_populates="voltage")
 
     class Config:
         from_attributes = True

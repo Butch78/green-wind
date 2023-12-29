@@ -1,9 +1,23 @@
-# Green Wind
+# Green Wind - Data Engineering Project
 
-Green Wind is an example of a ETL tool that can extract the information from semi-structed data (JSON) to store it in a Postgres Database. We are then able to connect to the PostgresDB instance with a Jupyter Notebook to explore the data in the ```notebooks/battery_data_analysis.ipynb``` notebook.
+Green Wind is an example of a ETL tool that can extract the information from semi-structed data (JSON) to store it in a Postgres Database. We are then able to connect to the PostgresDB instance with a Jupyter Notebook to explore the data in the ```notebooks/battery_data_analysis.ipynb``` notebook. 
 
-This application also looks into creating a Digital Twin of a battery to identify the health of the battery and predict the remaining useful life of the battery. This is done in the ```notebooks/battery_data_analysis.ipynb``` notebook. The data is extracted from the csv files in ```data/raw/*``` The source of the Data and Data Science code is from here:
+## Project Overview
+
+Green Wind can run on a Cloud Provider such as AWS, Azure, or GCP and can scale to handle large amounts of data. The endpoints of the application can be extended to display the data in a web application or mobile application. It can also be extend to handle streaming data from a MQTT broker, or Kafka. The application can also be extended to handle unstructed data such as images, video, or audio. 
+
+This application also looks into creating a Digital Twin of a battery to identify the health of the battery and predict the remaining useful life of the battery. This is done in the ```notebooks/battery_data_analysis.ipynb``` notebook. The data is extracted from the csv files in ```data/raw/*```. The source of the Data and Data Science code is from here:
 https://github.com/Duvey314/austin-green-energy-predictor
+
+
+### Real World Application
+
+In a real world application we could stream this data from a MQTT broker into a MySQL instance similar to [Zendesk's Solution.](https://www.infoq.com/news/2023/12/zendesk-dynamodb-mysql-s3-cost/) We could use a tool like Apache Airflow to schedule a job to extract with the data from the MySQL instance and use Apache Spark to process the data and store it store it in a Data Lake such as AWS S3. Then we could use a tool like AWS Glue to transform the data and store it in a Data Warehouse such as AWS Redshift for large scale analytics. 
+
+
+
+
+
 
 Here is an example of some unstructered data that we will be working with, in this example you can post this data to the API endpoint ```localhost:8000/battery_data```
 
@@ -87,13 +101,10 @@ Here is an example of some unstructered data that we will be working with, in th
 ```
 This application will take in this data and store it in a PostgresDB instance in the following schema:
 
-![Here is a ](./app/schema/green-wind.svg)
+![Database UML Diagram](./app/schema/green-wind.svg)
 
 
-In a real world application we could stream this data from a MQTT broker into a MySQL instance similar to [Zendesk's Solution.](https://www.infoq.com/news/2023/12/zendesk-dynamodb-mysql-s3-cost/)
 
-
-Then we could use a tool like Apache Airflow to schedule a job to extract with the data from the MySQL instance and use Apache Spark to process the data and store it store it in a Data Lake such as AWS S3. Then we could use a tool like AWS Glue to transform the data and store it in a Data Warehouse such as AWS Redshift for large scale analytics.
 
 
 # Set Up Instructions

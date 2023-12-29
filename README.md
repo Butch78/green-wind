@@ -6,8 +6,11 @@ Green Wind is an example of a ETL tool that can extract the information from sem
 
 Green Wind can run on a Cloud Provider such as AWS, Azure, or GCP and can scale to handle large amounts of data. The endpoints of the application can be extended to display the data in a web application or mobile application. It can also be extend to handle streaming data from a MQTT broker, or Kafka. The application can also be extended to handle unstructed data such as images, video, or audio. 
 
+> [!NOTE]
+> The Digital Twin application is not fully implemented, it is a work in progress 👷‍♂️
+
 This application also looks into creating a Digital Twin of a battery to identify the health of the battery and predict the remaining useful life of the battery. This is done in the ```notebooks/battery_data_analysis.ipynb``` notebook. The data is extracted from the csv files in ```data/raw/*```. The source of the Data and Data Science code is from here:
-https://github.com/Duvey314/austin-green-energy-predictor
+https://github.com/Duvey314/austin-green-energy-predictor and the raw files can be found in the ```example/``` folder.
 
 
 ### Real World Application
@@ -120,12 +123,10 @@ A selection menu will open allowing you to create a Codespace. After create a Co
 It should Automatically build the application and install the using the poetry package manager. if not run the following command in the terminal:
 
 ```bash
-poetry shell
-
-poetry install
+poetry shell && poetry install
 ```
 
-### Option 2: Local Machine
+### Option 2: Local Machine - Visual Studio Code and Docker
 
 This repository can be [used locally](https://code.visualstudio.com/docs/devcontainers/tutorial) on a system running Visual Studio Code and Docker, or in a remote cloud based [Codespaces](https://github.com/features/codespaces) environment as shown in Option 1.
 
@@ -138,26 +139,25 @@ This repository can be [used locally](https://code.visualstudio.com/docs/devcont
 
 If not click the button in the bottom left corner and then select "Reopen in Container" or type into the command prompt at the top an enter the following command ```>Reopen in container```
 
-This will build the Docker container and should install the requirements.txt file 
-Automatically build the application and install the ```requirements.txt``` file along with creating a PostgresDB instance. if not run the following command in the terminal:
+This will build the Docker container, run the PostgresDB and should install packages using the poetry package manager. if not run the following command in the terminal:
 
 ```bash
-pip install -r requirements.txt
+poetry shell && poetry install
 ```
 
-# Start Application Command
+# Starting The Application
 
 rename the ```.env.example``` in the root directory to ```.env```
 
 Then the following command will load the Data into the PostgresDB and start a FastAPI application on port 8000, You can view the API documentation at <http://localhost:8000/docs>
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn app.main:app
 ```
 
 Once the application has started The csv files from ```/data/raw```  will automatically be loaded into the PostgresDB instance. 
 
-We can then connect to the Jupyter Notebook: ```notebooks/cell_processing.ipynb.ipynb```  to explore the data with a read only connection to the PostgresDB instance.
+It will also create some fake Battery data. We can then connect to the Jupyter Notebook: ```notebooks/battery_data_analysis.ipynb```  to explore the data with a read only connection to the PostgresDB instance.
 
 
 

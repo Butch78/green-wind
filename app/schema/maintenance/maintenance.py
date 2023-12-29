@@ -1,7 +1,10 @@
 from typing import TYPE_CHECKING, List, Optional
 from sqlmodel import Field, SQLModel, Relationship
 from app.schema.schemas import TimestampSchema
-from app.schema.maintenance.maintenance_action import MaintenanceAction
+from app.schema.maintenance.maintenance_action import (
+    MaintenanceAction,
+    MaintenanceActionCreate,
+)
 
 if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
@@ -10,7 +13,7 @@ if TYPE_CHECKING:
 class MaintenanceBase(SQLModel):
     last_maintenance_date: str
     next_maintenance_due: str
-    maintenance_actions: List[MaintenanceAction] = []
+    maintenance_actions: List[MaintenanceActionCreate] = []
 
 
 class Maintenance(TimestampSchema, SQLModel, table=True):

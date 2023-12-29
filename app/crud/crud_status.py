@@ -1,5 +1,6 @@
 from app.crud.base import CRUDBase
 from app import crud
+from app.schema.status.fault import Fault
 
 from app.schema.status.status import Status, StatusCreate, StatusUpdate
 
@@ -14,7 +15,7 @@ class CRUDStatus(CRUDBase[Status, StatusCreate, StatusUpdate]):
 
         db_faults = []
         for fault in obj_in.faults:
-            fault.status_id = db_model.id
+            fault = Fault(status_id=db_model.id, **fault.model_dump())
             db_faults.append(crud.fault.create(db, obj_in=fault))
 
         db_model.faults = db_faults

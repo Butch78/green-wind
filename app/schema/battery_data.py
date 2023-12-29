@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from sqlmodel import Field, Relationship, SQLModel
 from app.schema.capacity import Capacity, CapacityCreate
@@ -22,7 +23,7 @@ class BatteryDataBase(SQLModel):
     battery_id: str
     manufacturer: str
     model: str
-    timestamp: str
+    timestamp: datetime
 
     capacity: CapacityCreate
     voltage: VoltageCreate
@@ -40,7 +41,7 @@ class BatteryData(TimestampSchema, SQLModel, table=True):
     battery_id: str
     manufacturer: str
     model: str
-    timestamp: str
+    timestamp: datetime
 
     capacity: Optional["Capacity"] = Relationship(back_populates="battery_data")
     voltage: Optional["Voltage"] = Relationship(back_populates="battery_data")

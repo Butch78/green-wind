@@ -21,7 +21,7 @@
 		}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "poetry shell && poetry install",
+	"postCreateCommand": "poetry shell",
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.

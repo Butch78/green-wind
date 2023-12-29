@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, List, Optional
 from sqlmodel import Field, SQLModel, Relationship
 from app.schema.schemas import TimestampSchema
-from app.schema.status.fault import Fault
+from app.schema.status.fault import FaultCreate, Fault
 
 if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
@@ -12,7 +12,7 @@ class StatusBase(SQLModel):
     health_status: str
     operational_status: str
 
-    faults: List[Fault] = []
+    faults: List[FaultCreate] = []
 
 
 class Status(TimestampSchema, SQLModel, table=True):

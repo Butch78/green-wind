@@ -6,6 +6,7 @@ from app.schema.maintenance.maintenance import (
     MaintenanceCreate,
     MaintenanceUpdate,
 )
+from app.schema.maintenance.maintenance_action import MaintenanceAction
 
 
 class CRUDMaintenance(CRUDBase[Maintenance, MaintenanceCreate, MaintenanceUpdate]):
@@ -16,9 +17,9 @@ class CRUDMaintenance(CRUDBase[Maintenance, MaintenanceCreate, MaintenanceUpdate
         db.refresh(db_model)
 
         db_maintenance_actions = []
-        for action in obj_in.maintenance_actions:
-            action.maintenance_id = db_model.id
-            db_maintenance_actions.append(crud.maintenance_action.create(db, obj_in=action))
+        for maintenance_action in obj_in.maintenance_actions:
+            maintenance_action = MaintenanceAction(maintenance_id=db_model.id, **maintenance_action.model_dump())
+            db_maintenance_actions.append(crud.maintenance_action.create(db, obj_in=maintenance_action))
 
         db_model.maintenance_actions = db_maintenance_actions
         return db_model

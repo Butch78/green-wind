@@ -1,5 +1,6 @@
 from app.utils.import_cell_conditions import import_cell_conditions
 from app.utils.import_cell_training_data import import_cell_training_data
+from app.utils.seed_database import create_battery_data
 
 from dotenv import load_dotenv
 from sqlmodel import SQLModel, Session, create_engine
@@ -33,9 +34,9 @@ def import_data():
     # Use get_session() to get a session
     session = next(get_session())
 
-    # TODO parrallelize so that the data is imported in parallel
     import_cell_conditions(session)
     import_cell_training_data(session)
+    create_battery_data(session)
 
     session.close()
 
@@ -43,7 +44,6 @@ def import_data():
 
 
 def create_read_only_user():
-
     session = next(get_session())
 
     # Create a new user if it doesn't already exist

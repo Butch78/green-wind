@@ -10,7 +10,7 @@ Green Wind can run on a Cloud Provider such as AWS, Azure, or GCP and can scale 
 > The Digital Twin application is not fully implemented, it is a work in progress 👷‍♂️
 
 This application also looks into creating a Digital Twin of a battery to identify the health of the battery and predict the remaining useful life of the battery. This is done in the ```notebooks/battery_data_analysis.ipynb``` notebook. The data is extracted from the csv files in ```data/raw/*```. The source of the Data and Data Science code is from here:
-https://github.com/Duvey314/austin-green-energy-predictor and the raw files can be found in the ```example/``` folder.
+https://github.com/Duvey314/austin-green-energy-predictor and the raw files can be found in the ```digital_twin/``` folder.
 
 
 ### Real World Application

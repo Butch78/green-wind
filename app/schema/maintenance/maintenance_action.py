@@ -3,24 +3,24 @@ from sqlmodel import Field, SQLModel, Relationship
 from app.schema.schemas import TimestampSchema
 
 if TYPE_CHECKING:
-    from app.schema.maintence.maintence import Maintenance
+    from app.schema.maintenance.maintenance import Maintenance
 
 
-class MaintenanceActionBase(TimestampSchema, SQLModel):
+class MaintenanceActionBase(SQLModel):
     action_id: str
     action_description: str
     action_status: str
 
 
-class MaintenceAction(TimestampSchema, SQLModel, table=True):
+class MaintenanceAction(TimestampSchema, SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
     action_id: str
     action_description: str
     action_status: str
 
-    maintence_id: Optional[int] = Field(default=None, foreign_key="maintenance.id")
+    maintenance_id: Optional[int] = Field(default=None, foreign_key="maintenance.id")
     maintenance: Optional["Maintenance"] = Relationship(
-        back_populates="maintence_actions"
+        back_populates="maintenance_actions"
     )
 
     class Config:

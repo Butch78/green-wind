@@ -12,6 +12,8 @@ class StatusBase(SQLModel):
     health_status: str
     operational_status: str
 
+    faults: List[Fault] = []
+
 
 class Status(TimestampSchema, SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)

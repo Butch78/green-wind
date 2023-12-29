@@ -12,11 +12,9 @@ class MaintenanceActionBase(SQLModel):
     action_status: str
 
 
-class MaintenanceAction(TimestampSchema, SQLModel, table=True):
+class MaintenanceAction(TimestampSchema, MaintenanceActionBase, table=True):
     id: int = Field(default=None, primary_key=True)
-    action_id: str
-    action_description: str
-    action_status: str
+
 
     maintenance_id: Optional[int] = Field(default=None, foreign_key="maintenance.id")
     maintenance: Optional["Maintenance"] = Relationship(

@@ -1,4 +1,5 @@
 from app.crud.base import CRUDBase
+from app import crud
 
 from app.schema.maintenance.maintenance import (
     Maintenance,
@@ -14,12 +15,12 @@ class CRUDMaintenance(CRUDBase[Maintenance, MaintenanceCreate, MaintenanceUpdate
         db.commit()
         db.refresh(db_model)
 
-        db_Maintenance_actions = []
-        for action in obj_in.actions:
-            action.Maintenance_id = db_model.id
-            db_Maintenance_actions.append(self.create(db, obj_in=action))
+        db_maintenance_actions = []
+        for action in obj_in.maintenance_actions:
+            action.maintenance_id = db_model.id
+            db_maintenance_actions.append(crud.maintenance_action.create(db, obj_in=action))
 
-        db_model.Maintenance_actions = db_Maintenance_actions
+        db_model.maintenance_actions = db_maintenance_actions
         return db_model
 
 

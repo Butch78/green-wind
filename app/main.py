@@ -5,7 +5,12 @@ from contextlib import asynccontextmanager
 
 
 from app.utils.config import settings
-from app.utils.deps import create_db_and_tables, import_data, create_read_only_user
+from app.utils.deps import (
+    drop_db_and_tables,
+    create_db_and_tables,
+    import_data,
+    create_read_only_user,
+)
 from app.api.api import api_router
 
 app = FastAPI()

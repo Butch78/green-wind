@@ -1,22 +1,28 @@
+from app.schema.capacity import Capacity
+from app.schema.current import Current
+from app.schema.energy_throughput import EnergyThroughput
+from app.schema.environmental_conditions import EnvironmentalCondition
+from app.schema.operational_parameters import OperationalParameter
+from app.schema.temperature import Temperature
+from app.schema.voltage import Voltage
 from sqlmodel import SQLModel
 from typing import Optional
 from app.crud.base import CRUDBase
+from app import crud
 
 from app.schema.battery_data import BatteryData, BatteryDataCreate, BatteryDataUpdate
 
 
 class CRUDBatteryData(CRUDBase[BatteryData, BatteryDataCreate, BatteryDataUpdate]):
     def create_child(
-        self, db, *, battery_data_id, obj_in, model: SQLModel
+        self, db, *, obj_in: SQLModel
     ) -> Optional[SQLModel]:
-        db_model = model.model_validate(
-            obj_in.model_dump(), battery_data_id=battery_data_id
-        )
-        db.add(db_model)
+       
+        db.add(obj_in)
         db.commit()
-        db.refresh(db_model)
+        db.refresh(obj_in)
 
-        return db_model
+        return obj_in
 
     def create(self, db, *, obj_in) -> BatteryData | None:
         db_model = BatteryData.model_validate(obj_in.model_dump())
@@ -24,21 +30,16 @@ class CRUDBatteryData(CRUDBase[BatteryData, BatteryDataCreate, BatteryDataUpdate
         db.commit()
         db.refresh(db_model)
 
-        # Loop through the fields of BatteryDataCreate
-        for field_name, field_type in BatteryDataCreate.__annotations__.items():
-            # If the field is a child model and it exists in obj_in
-            if field_type.__origin__ is SQLModel and hasattr(obj_in, field_name):
-                # Create the child model
-                child_obj_in = getattr(obj_in, field_name)
-                child_model = field_type.__args__[0]
-                child_db_model = self.create_child(
-                    db,
-                    battery_data_id=db_model.id,
-                    obj_in=child_obj_in,
-                    model=child_model,
-                )
-                # Set the child model in db_model
-                setattr(db_model, field_name, child_db_model)
+        db_model.voltage = self.create_child(db, obj_in=Voltage(battery_data_id=db_model.id, **obj_in.voltage.model_dump()))
+        db_model.capacity = self.create_child(db, obj_in=Capacity(battery_data_id=db_model.id, **obj_in.capacity.model_dump()))
+        db_model.temperature = self.create_child(db, obj_in=Temperature(battery_data_id=db_model.id, **obj_in.temperature.model_dump()))
+        db_model.current = self.create_child(db, obj_in=Current(battery_data_id=db_model.id, **obj_in.current.model_dump()))
+        db_model.energy_throughput = self.create_child(db, obj_in=EnergyThroughput(battery_data_id=db_model.id, **obj_in.energy_throughput.model_dump()))
+        db_model.environmental_conditions = self.create_child(db, obj_in=EnvironmentalCondition(battery_data_id=db_model.id, **obj_in.environmental_conditions.model_dump()))
+        db_model.operational_parameters = self.create_child(db, obj_in=OperationalParameter(battery_data_id=db_model.id, **obj_in.operational_parameters.model_dump()))
+
+        db_model.status = crud.status.create(db, obj_in=obj_in.status)
+        db_model.maintenance = crud.maintenance.create(db, obj_in=obj_in.maintenance)
 
         return db_model
 

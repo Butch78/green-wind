@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class MaintenanceBase(SQLModel):
     last_maintenance_date: str
     next_maintenance_due: str
-    maintence_actions: List[MaintenanceAction] = []
+    maintenance_actions: List[MaintenanceAction] = []
 
 
 class Maintenance(TimestampSchema, SQLModel, table=True):

@@ -4,7 +4,7 @@ Green Wind is an example of a ETL tool that can extract the information from sem
 
 ## Project Overview
 
-Green Wind can run on a Cloud Provider such as AWS, Azure, or GCP and can scale to handle large amounts of data. The endpoints of the application can be extended to display the data in a web application or mobile application. It can also be extend to handle streaming data from a MQTT broker, or Kafka. The application can also be extended to handle unstructed data such as images, video, or audio. 
+Green Wind can run on a Cloud Provider such as AWS, Azure, or GCP and can scale to handle large amounts of data. The endpoints of the application can be extended to display the data in a web application or mobile application. It can also be extend to handle streaming data from a MQTT broker, or Kafka. The application can also be extended to handle unstructed data such as images, pdfs, video, or audio. 
 
 > [!NOTE]
 > The Digital Twin application is not fully implemented, it is a work in progress 👷‍♂️
@@ -15,7 +15,7 @@ https://github.com/Duvey314/austin-green-energy-predictor and the raw files can 
 
 ### Real World Application
 
-In a real world application we could stream this data from a MQTT broker into a MySQL instance similar to [Zendesk's Solution.](https://www.infoq.com/news/2023/12/zendesk-dynamodb-mysql-s3-cost/) We could use a tool like Apache Airflow to schedule a job to extract with the data from the MySQL instance and use Apache Spark to process the data and store it store it in a Data Lake such as AWS S3. Then we could use a tool like AWS Glue to transform the data and store it in a Data Warehouse such as AWS Redshift for large scale analytics. 
+In a real world application we could stream this data from a MQTT broker into a MySQL instance similar to [Zendesk's Solution.](https://www.infoq.com/news/2023/12/zendesk-dynamodb-mysql-s3-cost/) We could use a tool like Apache Airflow to schedule a job to extract with the data from the MySQL instance and use Apache Spark to process the data and store it store it in a Data Lake such as AWS S3. Then we could use a tool like AWS Glue to transform the data and store it in a Data Warehouse such as AWS Redshift or [Apache Iceberg](https://iceberg.apache.org/) for large scale analytics. 
 
 
 

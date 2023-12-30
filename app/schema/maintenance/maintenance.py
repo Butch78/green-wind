@@ -5,21 +5,21 @@ from app.schema.maintenance.maintenance_action import (
     MaintenanceAction,
     MaintenanceActionCreate,
 )
-
+from datetime import date
 if TYPE_CHECKING:
     from app.schema.battery_data import BatteryData
 
 
 class MaintenanceBase(SQLModel):
-    last_maintenance_date: str
-    next_maintenance_due: str
+    last_maintenance_date: date
+    next_maintenance_due: date
     maintenance_actions: List[MaintenanceActionCreate] = []
 
 
 class Maintenance(TimestampSchema, SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
-    last_maintenance_date: str
-    next_maintenance_due: str
+    last_maintenance_date: date
+    next_maintenance_due: date
     maintenance_actions: List["MaintenanceAction"] = Relationship(
         back_populates="maintenance"
     )

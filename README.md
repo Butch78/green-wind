@@ -120,10 +120,15 @@ To get started, create a codespace for this repository by clicking this 👇
 
 A selection menu will open allowing you to create a Codespace. After create a Codespace it  will open in a web-based version of Visual Studio Code. The [dev container](.devcontainer/devcontainer.json) is fully configured with software needed for this project along with added development vscode extensions such as [Jupyter Notebook](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter), Python, and Docker.
 
-It should Automatically build the application and install the using the poetry package manager. if not run the following command in the terminal:
+Once the Codespace has been created, open a terminal and run the following command to start the poetry shell 
 
 ```bash
-poetry shell && poetry install
+poetry shell
+```
+Install the packages from the pyproject.toml file using the following command:
+
+```bash
+poetry install
 ```
 
 ### Option 2: Local Machine - Visual Studio Code and Docker
@@ -141,8 +146,15 @@ If not click the button in the bottom left corner and then select "Reopen in Con
 
 This will build the Docker container, run the PostgresDB and should install packages using the poetry package manager. if not run the following command in the terminal:
 
+Once the Devcontainer has been created, open a terminal and run the following command to start the poetry shell 
+
 ```bash
-poetry shell && poetry install
+poetry shell
+```
+Install the packages from the pyproject.toml file using the following command:
+
+```bash
+poetry install
 ```
 
 # Starting The Application

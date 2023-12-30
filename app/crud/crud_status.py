@@ -23,4 +23,3 @@ class CRUDStatus(CRUDBase[Status, StatusCreate, StatusUpdate]):
 
 
 status = CRUDStatus(Status)
-# TODO implement child creates

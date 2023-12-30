@@ -21,7 +21,7 @@
 		}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "poetry shell",
+	// "postCreateCommand": "poetry shell",
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -31,7 +31,6 @@
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"charliermarsh.ruff",
-				"ms-python.black-formatter",
 				"mtxr.sqltools",
 				"mtxr.sqltools-driver-pg",
 				"ms-vscode.vscode-node-azure-pack",
@@ -39,7 +38,6 @@
 				"GitHub.copilot-chat",
 				"ms-toolsai.jupyter",
 				"ms-azuretools.vscode-docker",
-				"James-Yu.latex-workshop"
 			],
 			// Set *default* container specific settings.json values on container create.
 			"settings": {

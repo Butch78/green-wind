@@ -159,8 +159,6 @@ poetry install
 
 # Starting The Application
 
-rename the ```.env.example``` in the root directory to ```.env```
-
 Then the following command will load the Data into the PostgresDB and start a FastAPI application on port 8000, You can view the API documentation at <http://localhost:8000/docs>
 
 ```bash

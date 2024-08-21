@@ -5,9 +5,7 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/poetry:2": {}
-	},
+	"features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// This can be used to network with other containers or the host.
 	"forwardPorts": [
@@ -21,13 +19,14 @@
 		}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "poetry shell",
+	"postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh",
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
+				"fill-labs.dependi",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"charliermarsh.ruff",

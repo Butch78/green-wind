@@ -7,6 +7,7 @@ from green_wind.schema.battery_data import (
     BatteryDataRead,
     BatteryDataReadOut,
 )
+from green_wind import crud
 
 router = APIRouter()
 
